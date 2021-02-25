@@ -50,4 +50,11 @@ def file2matrix(filename):
 		classLabelVector.append(listFromLine[-1])
 		index+=1
 	return returnMat,classLabelVector
-
+#Aqui vamos a usar Matplotlib todo debe ser directo
+#en la linea de comando de python una vez creado:
+#datingDataMat
+#fig=plt.figure()
+#ax=fig.add_subplot(111)
+#ax.scatter(datingDataMat[:,1], datingDataMat[:,2])
+#plt.show()
+#ax.scatter(datingDataMat[:,1], datingDataMat[:,2], 15.0*array(datingLabels,dtype=numpy.int32), 15.0*array(datingLabels,dtype=numpy.int32))
