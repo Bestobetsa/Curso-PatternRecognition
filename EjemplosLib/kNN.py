@@ -58,3 +58,30 @@ def file2matrix(filename):
 #ax.scatter(datingDataMat[:,1], datingDataMat[:,2])
 #plt.show()
 #ax.scatter(datingDataMat[:,1], datingDataMat[:,2], 15.0*array(datingLabels,dtype=numpy.int32), 15.0*array(datingLabels,dtype=numpy.int32))
+#Formula a utilizar para sacar la normalizacion: newValue=(oldValue-min)/(max-min)
+#normMat, ranges, minVals = kNN.autoNorm(datingDataMat)
+def autoNorm(dataSet):
+	minVals=dataSet.min(0)
+	maxVals=dataSet.max(0)
+	ranges=maxVals-minVals
+	normDataSet=zeros(shape(dataSet))
+	m=dataSet.shape[0]
+	normDataSet=dataSet-tile(minVals,(m,1))
+	normDataSet=dataSet/tile(ranges,(m,1))
+	return normDataSet,ranges,minVals
+#en lasiguiente funcion se evaluara el clasificdor
+#0 significa que funciona bien 1.0 que el error es 
+#absoluto y siempre tendra errores al clasificar
+#kNN.datingClassTest()
+def datingClassTest():
+	hoRatio=0.10
+	datingDataMat,datingLabels=file2matrix('datingTestSet2.txt')
+	normMat,ranges, minVals=autoNorm(datingDataMat)
+	m=normMat.shape[0]
+	numTestVecs=int(m*hoRatio)
+	errorCount=0
+	for i in range(numTestVecs):
+		classifierResult = classify0(normMat[i,:],normMat[numTestVecs:m,:],datingLabels[numTestVecs:m],3)
+		print("the classifier came back with: {0}, the real answer is: {1}".format(classifierResult, datingLabels[i])) 
+		if(classifierResult!=datingLabels[i]): errorCount+=1.0
+	print("the total error rate is: %f" % (errorCount/float(numTestVecs)))
