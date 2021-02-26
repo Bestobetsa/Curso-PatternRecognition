@@ -85,3 +85,16 @@ def datingClassTest():
 		print("the classifier came back with: {0}, the real answer is: {1}".format(classifierResult, datingLabels[i])) 
 		if(classifierResult!=datingLabels[i]): errorCount+=1.0
 	print("the total error rate is: %f" % (errorCount/float(numTestVecs)))
+#ahora en esta seccion se va a predecir cuanto puede agraddarle una persona
+#raw_input le permite al usuario ingresar datos y los regresa 
+#kNN.classifyPerson()
+def classifyPerson():
+	resultList=['not at all','in small does', 'in large does']
+	percentTast=float(input("percentage of time spent playing video games?"))
+	ffMiles=float(input("frequent flimer miles earned per year?"))
+	iceCream=float(input("litters of ice cream consumed per year?"))
+	datingDataMat, datingLabels=file2matrix('datingTestSet2.txt')
+	normMat,ranges,minVals=autoNorm(datingDataMat)
+	inArr=array([ffMiles,percentTast,iceCream])
+	classifierResult=classify0((inArr-minVals)/ranges,normMat,datingLabels,3)
+	print("You Will probably like this person: ",resultList[classifierResult -1])
