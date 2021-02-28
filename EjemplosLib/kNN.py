@@ -98,3 +98,28 @@ def classifyPerson():
 	inArr=array([ffMiles,percentTast,iceCream])
 	classifierResult=classify0((inArr-minVals)/ranges,normMat,datingLabels,3)
 	print("You Will probably like this person: ",resultList[classifierResult -1])
+#Para este ejemplo haremos un clasificador para HANDWRINTING con kNN
+def handwritingClasssTest():
+	hwLabels=[]
+	trainingFileList=listdir('trainingDigits')
+	m=len(trainingFileList)
+	trainingMat=zeros((m,1024))
+	for i in range(m):
+		fileNameStr=trainingFileList[i]
+		fileStr=fileNameStr.split('.')[0]
+		classNumStr=int(fileStr.split('_')[0])
+		hwLabels.append(classNumStr)
+		trainingMat[i,:]=img2vector('trainingDigits/%s'%fileNameStr)
+	testFileList=listdir('testDigits')
+	errorCount=0.0
+	mTest=len(testFileList)
+	for i in range(mTest):
+		fileNameStr=testFileList[i]
+		fileStr=fileNameStr.split('.')[0]
+		classNumStr=int(fileStr.split('_')[0])
+		vectorUnderTest=img2vector('testDigits/%'%fileNameStr)
+		classifierResult=classify0(vectorUnderTest,\trainingMat,hwLabels,3)
+		print("the classifier came back with: {0}, the real answer is: {1}".format(classifierResult,classNumStr))
+		if(classifierResult!=classNumStr):errorCount+=1.0
+	print("\n The total number of errors is:{0}".format(errorCount))
+	print("\n The total error rate is:{0}".format(errorCount/float(mTest)))
