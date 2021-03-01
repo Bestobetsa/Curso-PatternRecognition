@@ -77,6 +77,16 @@ def testingNB():
 	testEntry=['stupid','garbage']
 	thisDoc=array(setOfWords2Vect(myVocabList,testEntry))
 	print(testEntry,"Classified as:",classifyNB(thisDoc,p0V,p1V,pAb))
+#vamos a darle una mejora a setOFWords2Vect
+#ahora iremos incrementando el vector word
+def bagOfWords2VectMN(vocabList,inputSet):
+	returnVec=[0]*len(vocabList)
+	for word in inputSet:
+		if word in vocabList:
+			returnVec[vocabList.index(word)]+=1
+	return returnVec
+
+
 #para probar todo en a linea de comandos de Python3 o Python2
 #from numpy import *
 #import Classifier_Bayes
@@ -89,3 +99,18 @@ def testingNB():
 #...
 #	trainMat.append(Classifier_Bayes.setOfWords2Vect(myVocabList, postinDoc))
 #p0V,p1V,pAb=Classifier_Bayes.trainNB0(trainMat,listClasses)
+#Classifier_Bayes.testingNB()
+#Para capturar texto y separarlo utilizaremos tambien expresiones reguares
+#ya que puntuacion "." se consdera en la palabra
+#import re
+#mySent='This book is the best book on Python or M.L. I have ever laid eyes upon'
+#con la siguiente linea eliminamos los string que no sean mayor que 0
+#[tok for tok in listOfTokens if len(tok) > 0]
+#ya que queremos que todo sea parejo ya sea Mayusculas o MInusculas
+#debemos utilizar las funciones (.lowe()) o (.upper())
+#[tok.lower() for tok in listOfTokens if len(tok) > 0]
+#regEx=re.compile('\\W*')
+#listOfTokens=regEx.split(mySent)
+#emailText = open('email/ham/6.txt').read()
+#listOfTokens=regEx.split(emailText)
+#el archivo 6.txt se encuentra dentro de ham en la capeta email (email.zip)
