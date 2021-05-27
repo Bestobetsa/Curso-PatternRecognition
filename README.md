@@ -7,3 +7,4 @@ Para el modulo de Transfomermers es necesario:
   -Una GPU (o conectarse a google colab y verificar que se usa GPU)
   -Conda o en su defecto tener los modulos de TensorFlow/Keras o Pandas.
 Los archivos txt o fasta son de la proteina BRAP1 y estan en modo proteinico, ARN (AUGC) y ADN (ATCG)
+NOTA: AUN ESTA EN REVISION EL ARCHIVO DE TRANSFORMER, NO ESTA EN FUNCIONAMIENTO DE LA ULTIMA PARTE DEL ENTRENAMIENTO Y TEST, EL MODELO Y SU TOKENIZACION FUNCIONAN.
